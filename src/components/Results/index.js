@@ -24,9 +24,9 @@ const Results = () => {
   switch (location.pathname) {
     case '/search':
       return (
-        <div className='flex flex-wrap justify-between space-y-6 sm:px-56'>
+        <div className='flex flex-col justify-between space-y-6'>
           {results?.map(({link, title}, idx) => (
-            <div key={idx} className='md:w-2/5 w-full'>
+            <div key={idx} className='w-full md:w-1/2'>
               <a href={link} rel="noreferrer">
                 <p className='text-lg hover:underline dark:text-blue-300 text-blue-700'>
                   {title}
@@ -54,19 +54,19 @@ const Results = () => {
       )
     case '/news':
       return (
-        <div className='flex flex-wrap justify-between space-y-6 sm:px-56 items-center'>
+        <div className='flex flex-col justify-between space-y-6'>
           {results?.map(({links, title, id, source}) => (
-            <div key={id} className='w-full'>
+            <div key={id} className='w-full md:w-1/2'>
               <a href={links?.[0].href} rel="noreferrer" className='hover:underline'>
                 <p className='text-lg dark:text-blue-300 text-blue-700'>
                   {title}
                 </p>
-                <div className='flex gap-4'>
-                  <a href={source?.href} rel="noreferrer">
-                    {source?.href}
-                  </a>
-                </div>
               </a>
+              <div className='flex gap-4'>
+                <a href={source?.href} rel="noreferrer">
+                  {source?.href}
+                </a>
+              </div>
             </div>
           ))}
         </div>
@@ -76,7 +76,7 @@ const Results = () => {
         <div className='flex flex-wrap'>
           {results.map((video, idx) => (
             <div key={idx} className='p-2'>
-              <ReactPlayer url={video?.additional_links[0].href} controls width="350px" height="200px" />
+              {video?.additional_links[0].href && <ReactPlayer url={video?.additional_links[0].href} controls width="350px" height="200px" />}
             </div>
           ))}
         </div>
